@@ -1,4 +1,4 @@
-package pkg
+package main
 
 // Godogs available to eat
 var Godogs int

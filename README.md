@@ -1,9 +1,11 @@
 # cucumber-training
 
 ```
-$ export GO111MODULE=on
 $ go mod init
-$ go get github.com/cucumber/godog/cmd/godog@v0.8.1
+$ go get github.com/cucumber/godog/cmd/godog
+```
+
+```
 $ godog
 Feature: eat godogs
   In order to be happy
@@ -38,4 +40,27 @@ func FeatureContext(s *godog.Suite) {
 	s.Step(`^I eat (\d+)$`, iEat)
 	s.Step(`^there should be (\d+) remaining$`, thereShouldBeRemaining)
 }
+```
+
+
+```
+$ godog
+Feature: eat godogs
+  In order to be happy
+  As a hungry gopher
+  I need to be able to eat godogs
+
+  Scenario: Eat 5 out of 12          # features/godogs.feature:6
+    Given there are 12 godogs        # godogs_test.go:10 -> thereAreGodogs
+    When I eat 5                     # godogs_test.go:14 -> iEat
+    Then there should be 7 remaining # godogs_test.go:22 -> thereShouldBeRemaining
+
+  Scenario: Eat 2 out of 10          # features/godogs.feature:11
+    Given there are 10 godogs        # godogs_test.go:10 -> thereAreGodogs
+    When I eat 2                     # godogs_test.go:14 -> iEat
+    Then there should be 8 remaining # godogs_test.go:22 -> thereShouldBeRemaining
+
+2 scenarios (2 passed)
+6 steps (6 passed)
+329.122µs
 ```
