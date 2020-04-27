@@ -1,4 +1,4 @@
-# cucumber-training
+# cucumber-training-golang
 
 ```
 $ go mod tidy

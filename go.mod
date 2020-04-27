@@ -1,4 +1,4 @@
-module github.com/itsubaki/cucumber-training
+module github.com/itsubaki/cucumber-training-golang
 
 go 1.14
 
