@@ -1,8 +1,7 @@
 # cucumber-training
 
 ```
-$ go mod init
-$ go get github.com/cucumber/godog/cmd/godog
+$ go mod tidy
 ```
 
 ```
