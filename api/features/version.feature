@@ -6,3 +6,19 @@ Feature: get version
   Scenario: does not allow POST method
     When I send "POST" request to "/version"
     Then the response code should be 405
+    And the response should match json:
+      """
+      {
+        "error": "Method not allowed"
+      }
+      """
+
+  Scenario: should get version number
+    When I send "GET" request to "/version"
+    Then the response code should be 200
+    And the response should match json:
+      """
+      {
+        "version": "v0.5.3"
+      }
+      """

@@ -6,13 +6,14 @@ import (
 	"net/http/httptest"
 
 	"github.com/cucumber/godog"
+	"github.com/cucumber/messages-go/v10"
 )
 
 type apiFeature struct {
 	resp *httptest.ResponseRecorder
 }
 
-func (a *apiFeature) reset() {
+func (a *apiFeature) reset(m *messages.Pickle) {
 	a.resp = httptest.NewRecorder()
 }
 
@@ -48,10 +49,18 @@ func (a *apiFeature) CodeShouldBe(code int) error {
 	return nil
 }
 
+func (a *apiFeature) ShouldMatchJSON(arg1 *messages.PickleStepArgument_PickleDocString) error {
+	return godog.ErrPending
+}
+
+
+
 func FeatureContext(s *godog.Suite) {
 	api := &apiFeature{}
-	api.reset()
 
+	s.BeforeScenario(api.reset)
 	s.Step(`^I send "(GET|POST|PUT|DELETE)" request to "([^"]*)"$`, api.SendRequestTo)
 	s.Step(`^the response code should be (\d+)$`, api.CodeShouldBe)
+	s.Step(`^the response should match json:$`, api.ShouldMatchJSON)
+
 }
