@@ -1,4 +1,4 @@
-package main
+package godogs
 
 import (
 	"flag"
@@ -22,12 +22,14 @@ func TestMain(m *testing.M) {
 	flag.Parse()
 	opt.Paths = flag.Args()
 
-	status := godog.RunWithOptions("godogs", func(s *godog.Suite) {
+	godogs := func(s *godog.Suite) {
 		FeatureContext(s)
-	}, opt)
+	}
 
+	status := godog.RunWithOptions("godogs", godogs, opt)
 	if st := m.Run(); st > status {
 		status = st
 	}
+
 	os.Exit(status)
 }
