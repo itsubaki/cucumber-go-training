@@ -1,10 +1,6 @@
 # cucumber-training-golang
 
 ```
-$ go mod tidy
-```
-
-```
 $ godog
 Feature: eat godogs
   In order to be happy
@@ -62,4 +58,29 @@ Feature: eat godogs
 2 scenarios (2 passed)
 6 steps (6 passed)
 329.122µs
+```
+
+```
+$ go test -v --godog.format=pretty
+Feature: eat godogs
+  In order to be happy
+  As a hungry gopher
+  I need to be able to eat godogs
+
+  Scenario: Eat 5 out of 12          # features/godogs.feature:6
+    Given there are 12 godogs        # godogs_test.go:9 -> thereAreGodogs
+    When I eat 5                     # godogs_test.go:13 -> iEat
+    Then there should be 7 remaining # godogs_test.go:21 -> thereShouldBeRemaining
+
+  Scenario: Eat 2 out of 10          # features/godogs.feature:11
+    Given there are 10 godogs        # godogs_test.go:9 -> thereAreGodogs
+    When I eat 2                     # godogs_test.go:13 -> iEat
+    Then there should be 8 remaining # godogs_test.go:21 -> thereShouldBeRemaining
+
+2 scenarios (2 passed)
+6 steps (6 passed)
+316.294µs
+testing: warning: no tests to run
+PASS
+ok      github.com/itsubaki/cucumber-training-golang    0.033s
 ```
