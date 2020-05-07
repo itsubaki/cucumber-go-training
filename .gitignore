@@ -17,3 +17,5 @@
 
 # goland
 .idea
+coverage.out
+coverage.html
